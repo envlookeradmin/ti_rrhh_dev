@@ -694,14 +694,29 @@ view: fct_nomina {
   }
 
   # Variación % del Importe mensual de Tiempo Extra contra Sueldos
+  #measure: tiempo_extra_vs_sueldos_month {
+    #type: number
+  #  group_label: "Clasificación de Concepto"
+  #  label: "% T.E. vs Sueldos Mensual"
+  #  description: "Variación % del Importe mensual de Tiempo Extra contra Sueldos"
+    # sql: ${importe_tiempo_extra_month} / NULLIF(${importe_sueldos_month}, 0) ;;
+  #  sql: SAFE_DIVIDE(${importe_tiempo_extra_month},${importe_sueldos_month}) ;;
+  #  value_format_name: percent_2
+    #value_format: "0.00\%"
+  #}
+
   measure: tiempo_extra_vs_sueldos_month {
     group_label: "Clasificación de Concepto"
     label: "% T.E. vs Sueldos Mensual"
     description: "Variación % del Importe mensual de Tiempo Extra contra Sueldos"
-
-    sql: ${importe_tiempo_extra_month} / NULLIF(${importe_sueldos_month}, 0) ;;
-
-    value_format: "0.00%"
+    sql: SAFE_DIVIDE(${importe_tiempo_extra_month},${importe_sueldos_month}) * 100 ;;
+    html:
+      {% if rendered_value %}
+        {{ rendered_value | round: 2 }}%
+      {% else %}
+        0.00%
+      {% endif %}
+    ;;
   }
 
   # Suma del importe de Sueldos
@@ -734,9 +749,14 @@ view: fct_nomina {
     label: "% T.E. vs Sueldos"
     description: "Variación % del Importe de Tiempo Extra contra Sueldos"
 
-    sql: ${importe_tiempo_extra} / NULLIF(${importe_sueldos}, 0) ;;
-
-    value_format: "0.00%"
+    sql: ${importe_tiempo_extra} / NULLIF(${importe_sueldos}, 0) * 100 ;;
+    html:
+      {% if rendered_value %}
+      {{ rendered_value | round: 2 }}%
+      {% else %}
+      0.00%
+      {% endif %}
+      ;;
   }
 
   # Suma de la cantidad de Tiempo Extra
