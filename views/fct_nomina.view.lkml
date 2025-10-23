@@ -3,7 +3,8 @@ view: fct_nomina {
     sql: SELECT
       NOM.PERNR CODIGOPERSONAL,
       PLT.UnidadOrganizativa UNIDADORGANIZATIVA,
-      NOM.KOSTL CENTROCOSTOS,
+      --NOM.KOSTL CENTROCOSTOS,
+      CCS.LTEXT CENTROCOSTOS,
       CASE
         WHEN SUBSTR(NOM.KOSTL,2,1) = 'A' THEN 'ALU'
         WHEN SUBSTR(NOM.KOSTL,2,1) = 'P' THEN 'PET'
@@ -38,6 +39,8 @@ view: fct_nomina {
         ON NOM.WERKS = SDP.WERKS AND NOM.BTRTL = SDP.BTRTL
       LEFT JOIN `@{GCP_PROJECT}.RPT_CORP.RRHH_Plantilla` PLT
         ON NOM.PERNR = PLT.CodigoPersonal AND NOM.PAYDT BETWEEN PLT.Inicio AND PLT.Fin
+      LEFT JOIN `@{GCP_PROJECT}.RAW_CPI_RRHH_MX.cat_cecos` CCS ON
+          NOM.KOSTL = CCS.KOSTL
 
       ;;
   }
