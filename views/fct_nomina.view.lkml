@@ -558,9 +558,10 @@ view: fct_nomina {
     description: "Variación % entre el importe del año actual contra el año pasado"
 
     type: number
-    sql: CASE WHEN ${importe_lyear} = 0
-        THEN 100
-        ELSE (${importe_year} - ${importe_lyear}) / NULLIF(${importe_lyear}, 0) * 100
+    sql:
+      CASE WHEN ${importe_lyear} = 0 THEN
+        CASE WHEN ${importe_year} = 0 THEN 0 ELSE 100 END
+      ELSE (${importe_year} - ${importe_lyear}) / NULLIF(${importe_lyear}, 0) * 100
       END ;;
 
     value_format: "0.00\%"
