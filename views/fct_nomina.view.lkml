@@ -478,6 +478,22 @@ view: fct_nomina {
 
     value_format: "#,##0.00"
   }
+# Cantidad del año actual
+  measure: cantidad_year {
+    group_label: "Cantidad"
+    label: "Cantidad del año actual"
+    description: "Suma de la cantidad del mes actual"
+
+    type: sum
+    sql: ${TABLE}.CANTIDAD ;;
+
+    filters: {
+      field: is_current_year
+      value: "yes"
+    }
+
+    value_format: "#,##0.00"
+  }
 
   # Cantidad del mes anterior
   measure: cantidad_lmonth {
