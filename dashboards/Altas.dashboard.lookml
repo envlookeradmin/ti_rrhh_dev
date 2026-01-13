@@ -83,6 +83,8 @@
       Division: plantilla.division_envases
       Centro: plantilla.subdivision
       Codigo Pais: plantilla.codigo_pais
+      Posición: plantilla.posicion
+      Sociedad: plantilla.sociedad
     row: 0
     col: 0
     width: 12
@@ -167,6 +169,8 @@
       Division: plantilla.division_envases
       Centro: plantilla.subdivision
       Codigo Pais: plantilla.codigo_pais
+      Posición: plantilla.posicion
+      Sociedad: plantilla.sociedad
     row: 0
     col: 12
     width: 12
@@ -272,6 +276,8 @@
       Division: plantilla.division_envases
       Centro: plantilla.subdivision
       Codigo Pais: plantilla.codigo_pais
+      Posición: plantilla.posicion
+      Sociedad: plantilla.sociedad
     row: 6
     col: 2
     width: 20
@@ -280,7 +286,7 @@
   - name: Periodo
     title: Periodo
     type: field_filter
-    default_value: 2025/01/31
+    default_value: last month
     allow_multiple_values: true
     required: true
     ui_config:
@@ -307,7 +313,7 @@
   - name: Division
     title: Division
     type: field_filter
-    default_value: ALG,ALU,CORP,PET
+    default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
@@ -317,6 +323,19 @@
     explore: plantilla
     listens_to_filters: []
     field: plantilla.division_envases
+  - name: Sociedad
+    title: Sociedad
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: ti_rrhh
+    explore: plantilla
+    listens_to_filters: [Codigo Pais]
+    field: plantilla.sociedad
   - name: Centro
     title: Centro
     type: field_filter
@@ -328,5 +347,18 @@
       display: popover
     model: ti_rrhh
     explore: plantilla
-    listens_to_filters: [Division]
+    listens_to_filters: [Division, Codigo Pais]
     field: plantilla.subdivision
+  - name: Posición
+    title: Posición
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+    model: ti_rrhh
+    explore: plantilla
+    listens_to_filters: []
+    field: plantilla.posicion

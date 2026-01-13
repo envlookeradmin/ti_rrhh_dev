@@ -1,10 +1,10 @@
 ---
-- dashboard: rrhh
-  title: RRHH
+- dashboard: rrhh_nomina
+  title: RRHH Nomina
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: YFC6wObrT1CNg8jqU1zfnZ
+  preferred_slug: 86Op5yhe86eGpEdrknFaCV
   elements:
   - title: Analisis por rubro 1
     name: Analisis por rubro 1
@@ -93,7 +93,8 @@
     hidden_pivots: {}
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 20
     col: 0
     width: 24
@@ -105,7 +106,6 @@
     type: looker_grid
     fields: [fct_nomina.importe_lmonth, fct_nomina.importe_month, fct_nomina.variacion_importe_month_lmonth,
       fct_nomina.variacion_perc_importe_month_lmonth, fct_nomina.unidad_organizativa]
-    filters: {}
     sorts: [fct_nomina.unidad_organizativa]
     limit: 500
     column_limit: 50
@@ -173,7 +173,8 @@
     defaults_version: 1
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 41
     col: 0
     width: 12
@@ -225,7 +226,8 @@
     defaults_version: 1
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 41
     col: 12
     width: 12
@@ -235,8 +237,8 @@
     model: ti_rrhh
     explore: fct_nomina
     type: looker_grid
-    fields: [fct_nomina.codigopersonal, fct_nomina.importe_sueldos, fct_nomina.cantidad_tiempo_extra,
-      fct_nomina.importe_tiempo_extra, fct_nomina.tiempo_extra_vs_sueldos]
+    fields: [fct_nomina.centro_costos, fct_nomina.codigopersonal, fct_nomina.importe_sueldos,
+      fct_nomina.cantidad_tiempo_extra, fct_nomina.importe_tiempo_extra, fct_nomina.tiempo_extra_vs_sueldos]
     filters:
       fct_nomina.fecha_inicio_week: 2022/02/28
     sorts: [fct_nomina.codigopersonal desc]
@@ -276,11 +278,14 @@
         is_active: false
     header_font_color: "#ffff"
     header_background_color: "#b03427"
+    series_value_format:
+      fct_nomina.codigopersonal: '0'
     hidden_pivots: {}
     defaults_version: 1
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 49
     col: 0
     width: 12
@@ -290,11 +295,9 @@
     model: ti_rrhh
     explore: fct_nomina
     type: looker_grid
-    fields: [fct_nomina.subdivision, fct_nomina.importe_lyear2, fct_nomina.importe_lyear,
-      fct_nomina.importe_year, fct_nomina.variacion_importe_lyear_lyear2, fct_nomina.variacion_perc_importe_lyear_lyear2,
+    fields: [fct_nomina.subdivision, fct_nomina.importe_lyear, fct_nomina.importe_year,
       fct_nomina.variacion_importe_year_lyear, fct_nomina.variacion_perc_importe_year_lyear]
-    filters: {}
-    sorts: [fct_nomina.importe_lyear2 desc 0]
+    sorts: [fct_nomina.importe_lyear desc 0]
     limit: 500
     column_limit: 50
     total: true
@@ -365,7 +368,8 @@
     defaults_version: 1
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 49
     col: 12
     width: 12
@@ -373,7 +377,6 @@
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: "<div style=\"border-radius: 5px; padding: 5px 10px; background: #5e2129;\
       \ height: 60px; color: red;\">\n\t<nav style=\"font-size: 18px;\">\n\t\t<img\
       \ style=\"color: #efefef; padding: 5px 15px; float: left; height: 40px;\" src=\"\
@@ -387,110 +390,20 @@
     col: 0
     width: 24
     height: 2
-  - title: Analisis Tiempo Extra Acumulado
-    name: Analisis Tiempo Extra Acumulado
-    model: ti_rrhh
-    explore: fct_rh
-    type: looker_grid
-    fields: [fct_rh.codigo_personal, fct_rh.inicio_date, fct_rh.centro_costos, fct_rh.sociedad,
-      fct_rh.unidad_organizativa, fct_rh.posicion, fct_rh.year, fct_rh.Importe]
-    filters:
-      fct_rh.Importe: ">0"
-      fct_rh.sociedad: ENVASES UNIVERSALES DE MXCuautitlán
-    sorts: [fct_rh.codigo_personal]
-    limit: 500
-    column_limit: 50
-    dynamic_fields:
-    - category: table_calculation
-      label: Percent of Fct Rh Importe
-      value_format:
-      value_format_name: percent_2
-      calculation_type: percent_of_column_sum
-      table_calculation: percent_of_fct_rh_importe
-      args:
-      - fct_rh.Importe
-      _kind_hint: measure
-      _type_hint: number
-    show_view_names: false
-    show_row_numbers: true
-    transpose: false
-    truncate_text: true
-    hide_totals: false
-    hide_row_totals: false
-    size_to_fit: true
-    table_theme: white
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    header_text_alignment: left
-    header_font_size: '12'
-    rows_font_size: '12'
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    show_sql_query_menu_options: false
-    column_order: ["$$$_row_numbers_$$$", fct_rh.codigo_personal, fct_rh.inicio_date,
-      fct_rh.centro_costos, fct_rh.sociedad, fct_rh.unidad_organizativa, fct_rh.posicion,
-      fct_rh.year, fct_rh.Importe]
-    show_totals: true
-    show_row_totals: true
-    truncate_header: false
-    minimum_column_width: 75
-    series_labels:
-      fct_rh.year: Cantidad
-      percent_of_fct_rh_importe: Porcentaje
-    series_cell_visualizations:
-      fct_rh.year:
-        is_active: false
-    header_font_color: "#fff"
-    header_background_color: "#b03427"
-    hidden_pivots: {}
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    series_column_widths:
-      fct_rh.sociedad: 293
-    listen:
-      Período: fct_rh.date_filter
-    row: 14
-    col: 0
-    width: 24
-    height: 6
   - title: Comparativo
     name: Comparativo
     model: ti_rrhh
     explore: fct_rh
     type: looker_grid
     fields: [fct_rh.subdivision, fct_rh.CONTEO_TODO, fct_rh.Importe_TODO, fct_rh.inicio_year,
-      fct_rh.centro_costos]
+      fct_rh.unidad_organizativa]
     pivots: [fct_rh.inicio_year]
     fill_fields: [fct_rh.inicio_year]
     filters:
-      fct_rh.inicio_year: 2022/01/01 to 2025/02/16
-    sorts: [fct_rh.inicio_year, fct_rh.subdivision]
+      fct_rh.inicio_year: 3 years
+    sorts: [fct_rh.subdivision, fct_rh.inicio_year, fct_rh.unidad_organizativa]
     subtotals: [fct_rh.subdivision]
-    limit: 500
+    limit: 1500
     column_limit: 50
     show_view_names: false
     show_row_numbers: false
@@ -508,10 +421,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     show_sql_query_menu_options: false
-    column_order: [fct_rh.subdivision, fct_rh.centro_costos, 2022_fct_rh.CONTEO_TODO,
-      2022_fct_rh.Importe_TODO, 2023_fct_rh.Importe_TODO, 2023_fct_rh.CONTEO_TODO,
-      2024_fct_rh.Importe_TODO, 2024_fct_rh.CONTEO_TODO, 2025_fct_rh.Importe_TODO,
-      2025_fct_rh.CONTEO_TODO]
+    column_order: [fct_rh.subdivision, fct_rh.unidad_organizativa, 2023_fct_rh.Importe_TODO,
+      2023_fct_rh.CONTEO_TODO, 2024_fct_rh.Importe_TODO, 2024_fct_rh.CONTEO_TODO,
+      2025_fct_rh.Importe_TODO, 2025_fct_rh.CONTEO_TODO]
     show_totals: true
     show_row_totals: true
     truncate_header: false
@@ -559,7 +471,10 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    listen: {}
+    listen:
+      Período: fct_rh.date_filter
+      Division Envases: filtros.division_envases
+      Subdivision: fct_rh.subdivision
     row: 35
     col: 0
     width: 24
@@ -663,7 +578,8 @@
     hidden_fields: []
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 2
     col: 0
     width: 24
@@ -789,7 +705,8 @@
     hidden_pivots: {}
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 8
     col: 0
     width: 24
@@ -897,24 +814,25 @@
     hidden_pivots: {}
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 29
     col: 0
     width: 24
     height: 6
-  - title: Comparativo Plantas / Subdivisiones con desglose de rubros de pago
-    name: Comparativo Plantas / Subdivisiones con desglose de rubros de pago
+  - title: Comparativo Subdivisiones con desglose de rubros de pago
+    name: Comparativo Subdivisiones con desglose de rubros de pago
     model: ti_rrhh
     explore: fct_nomina
     type: looker_grid
     fields: [fct_nomina.subdivision, fct_nomina.clasificacion_cc, fct_nomina.importe_lyear2,
       fct_nomina.importe_lyear, fct_nomina.importe_year, fct_nomina.variacion_importe_year_lyear,
-      fct_nomina.variacion_perc_importe_year_lyear, fct_nomina.concepto]
+      fct_nomina.variacion_perc_importe_year_lyear, fct_nomina.cc]
     filters:
       fct_nomina.clasificacion_cc: "-NULL"
-    sorts: [fct_nomina.subdivision, fct_nomina.clasificacion_cc, fct_nomina.concepto]
+    sorts: [fct_nomina.subdivision, fct_nomina.clasificacion_cc, fct_nomina.cc]
     subtotals: [fct_nomina.subdivision, fct_nomina.clasificacion_cc]
-    limit: 500
+    limit: 2500
     column_limit: 50
     total: true
     show_view_names: false
@@ -999,16 +917,155 @@
     defaults_version: 1
     listen:
       Período: fct_nomina.date_filter
-      División de Envases: fct_nomina.division_envases
+      Division Envases: filtros.division_envases
+      Subdivision (2): fct_nomina.subdivision
     row: 57
     col: 0
     width: 24
     height: 7
+  - title: Análisis Tiempo Extra Acumulado
+    name: Análisis Tiempo Extra Acumulado
+    model: ti_rrhh
+    explore: fct_nomina
+    type: looker_grid
+    fields: [fct_nomina.subdivision, fct_nomina.centro_costos, fct_nomina.unidad_organizativa,
+      fct_nomina.importe_year, fct_nomina.cantidad_year]
+    filters:
+      fct_nomina.clasificacion_cc: Tiempo Extra
+      fct_nomina.date_filter: last day
+      filtros.division_envases: ALG,ALU,CORP,PET
+      fct_nomina.subdivision: ''
+    sorts: [fct_nomina.subdivision, fct_nomina.centro_costos, fct_nomina.importe_year
+        desc]
+    subtotals: [fct_nomina.clasificacion_cc]
+    limit: 500
+    column_limit: 50
+    total: true
+    dynamic_fields:
+    - category: table_calculation
+      label: Percent of Fct Nomina Variacion $ mensual (mes actual vs el año pasado)
+      value_format:
+      value_format_name: percent_0
+      calculation_type: percent_of_column_sum
+      table_calculation: percent_of_fct_nomina_variacion_mensual_mes_actual_vs_el_ano_pasado
+      args:
+      - fct_nomina.variacion_importe_month_lmonth
+      _kind_hint: measure
+      _type_hint: number
+      is_disabled: true
+    - _kind_hint: measure
+      _type_hint: number
+      args:
+      - fct_nomina.cantidad_year
+      based_on: fct_nomina.cantidad_year
+      calculation_type: percent_of_column_sum
+      category: table_calculation
+      label: Percent of Fct Nomina Cantidad del año actual
+      source_field: fct_nomina.cantidad_year
+      table_calculation: percent_of_fct_nomina_cantidad_del_ano_actual
+      value_format:
+      value_format_name: percent_0
+    show_view_names: false
+    show_row_numbers: false
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    column_order: ["$$$_row_numbers_$$$", fct_nomina.subdivision, fct_nomina.centro_costos,
+      fct_nomina.unidad_organizativa, fct_nomina.cantidad_year, fct_nomina.importe_year]
+    show_totals: true
+    show_row_totals: true
+    truncate_header: false
+    minimum_column_width: 75
+    series_labels:
+      fct_nomina.concepto: Concepto
+      fct_nomina.lyear: Año anterior
+      fct_nomina.year: Año actual
+      fct_nomina.Variacion_cantidad: Var. $
+      fct_nomina.Variacion: Var. %
+      fct_nomina.cantidad_lmonth: Mes anterior
+      fct_nomina.cantidad_month: Mes actual
+      fct_nomina.Variacion_cantidad_mensual: Var. $
+      fct_nomina.Variacion_mensual: Var. %
+      fct_nomina.clasificacion_cc: Clasificación
+      fct_nomina.variacion_perc_importe_month_lmonth: Var. %
+      fct_nomina.variacion_importe_month_lmonth: Var. $
+      fct_nomina.variacion_perc_importe_lmonth_lmonth2: Var. %
+      fct_nomina.variacion_importe_lmonth_lmonth2: Var. $
+      fct_nomina.importe_month: Año actual
+      fct_nomina.importe_lyear: Año pasado
+      fct_nomina.importe_lmonth: Año pasado
+      fct_nomina.cc: Concepto
+      percent_of_fct_nomina_variacion_mensual_mes_actual_vs_el_ano_pasado: Var. %
+        Rel.
+      fct_nomina.importe_lmonth2: Hace 2 años
+      fct_nomina.importe_year: Importe
+      fct_nomina.cantidad_year: Cant. Hrs.
+      percent_of_fct_nomina_cantidad_del_ano_actual: Porcentaje
+    series_cell_visualizations:
+      fct_nomina.lyear:
+        is_active: false
+    series_collapsed:
+      fct_nomina.clasificacion_cc: true
+      fct_nomina.subdivision: true
+      fct_nomina.centro_costos: true
+    header_font_color: "#fff"
+    header_background_color: "#b03427"
+    series_value_format:
+      fct_nomina.importe_year:
+        format_string: "$#,##0.00"
+      fct_nomina.cantidad_year:
+        format_string: "#,##0.00"
+      percent_of_fct_nomina_cantidad_del_ano_actual: "#,##0.00%"
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    hidden_pivots: {}
+    listen:
+      Período: fct_nomina.date_filter
+      Subdivision (2): fct_nomina.subdivision
+    row: 14
+    col: 0
+    width: 24
+    height: 6
   filters:
   - name: Período
     title: Período
     type: field_filter
-    default_value: 2022/12/31
+    default_value: last day
     allow_multiple_values: true
     required: false
     ui_config:
@@ -1019,10 +1076,36 @@
     explore: fct_nomina
     listens_to_filters: []
     field: fct_nomina.date_filter
-  - name: División de Envases
-    title: División de Envases
+  - name: Division Envases
+    title: Division Envases
     type: field_filter
-    default_value: ALG,CORP,ALU,PET
+    default_value: ALG,ALU,CORP,PET
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: ti_rrhh
+    explore: fct_nomina
+    listens_to_filters: []
+    field: filtros.division_envases
+  - name: Subdivision
+    title: Subdivision
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: ti_rrhh
+    explore: fct_rh
+    listens_to_filters: [Division Envases]
+    field: fct_rh.subdivision
+  - name: Subdivision (2)
+    title: Subdivision (2)
+    type: field_filter
+    default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
@@ -1031,4 +1114,4 @@
     model: ti_rrhh
     explore: fct_nomina
     listens_to_filters: []
-    field: fct_nomina.division_envases
+    field: fct_nomina.subdivision

@@ -12,7 +12,7 @@
     explore: complemento_nomina
     type: looker_grid
     fields: [complemento_nomina.area, complemento_nomina.division, complemento_nomina.fecha_pago_month_name,
-      complemento_nomina.nomina, complemento_nomina.tiempo_extra, complemento_nomina.pct_tiempo_extra,
+      complemento_nomina.salario, complemento_nomina.tiempo_extra, complemento_nomina.pct_tiempo_extra,
       complemento_nomina.tiempo_extra_mas_descanso, complemento_nomina.pct_te_dt]
     filters:
       complemento_nomina.area: "-NULL"
@@ -46,6 +46,8 @@
     minimum_column_width: 65
     series_labels:
       complemento_nomina.fecha_pago_month_name: Mes
+      complemento_nomina.nomina: Nomina
+      complemento_nomina.salario: Nomina
     series_cell_visualizations:
       complemento_nomina.nomina:
         is_active: true
@@ -54,8 +56,6 @@
     header_font_color: "#ffffff"
     header_background_color: "#B42F37"
     series_value_format:
-      complemento_nomina.nomina:
-        format_string:
       complemento_nomina.tiempo_extra:
         format_string:
       complemento_nomina.pct_tiempo_extra:
@@ -64,6 +64,8 @@
         format_string:
       complemento_nomina.pct_te_dt:
         format_string: "#,##0.00%"
+      complemento_nomina.salario:
+        format_string:
     x_axis_gridlines: false
     y_axis_gridlines: true
     show_y_axis_labels: true
@@ -94,6 +96,8 @@
       Mes Calendario Date: calendario_nomina.mes_calendario_date
       Division: complemento_nomina.division
       Subdivision: complemento_nomina.subdivision
+      Codigo Pais: complemento_nomina.codigo_pais
+      Sociedad: complemento_nomina.sociedad
     row: 0
     col: 1
     width: 15
@@ -148,6 +152,8 @@
       complemento_nomina.fecha_pago_month_name: Mes
       complemento_nomina.tiempo_extra_mas_descanso: Importe
       complemento_nomina.tiempo_extra_mas_descanso_cantidad: Cantidad
+    series_column_widths:
+      grouped-column-complemento_nomina.fecha_pago_month_name: 142
     series_cell_visualizations:
       complemento_nomina.nomina:
         is_active: true
@@ -157,6 +163,12 @@
     header_background_color: "#B42F37"
     series_value_format:
       complemento_nomina.tiempo_extra_mas_descanso:
+        name: usd
+        decimals: '2'
+        format_string: "$#,##0.00"
+        label: U.S. Dollars (2)
+        label_prefix: U.S. Dollars
+      complemento_nomina.tiempo_extra_mas_descanso_cantidad:
         format_string:
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -185,14 +197,17 @@
     totals_color: "#808080"
     defaults_version: 1
     hidden_pivots: {}
+    hidden_fields: [complemento_nomina.fecha_pago_month_name]
     listen:
       Mes Calendario Date: calendario_nomina.mes_calendario_date
       Division: complemento_nomina.division
       Subdivision: complemento_nomina.subdivision
+      Codigo Pais: complemento_nomina.codigo_pais
+      Sociedad: complemento_nomina.sociedad
     row: 11
     col: 1
-    width: 22
-    height: 10
+    width: 14
+    height: 7
   - title: Tiempo Extra vs Meta
     name: Tiempo Extra vs Meta
     model: ti_rrhh
@@ -201,8 +216,10 @@
     fields: [complemento_nomina.division, complemento_nomina.subdivision, complemento_nomina.meta_te,
       complemento_nomina.pct_tiempo_extra_icon, complemento_nomina.pct_te_dt_icon]
     sorts: [complemento_nomina.division, complemento_nomina.subdivision]
+    subtotals: [complemento_nomina.division]
     limit: 500
     column_limit: 50
+    total: true
     show_view_names: false
     show_row_numbers: false
     transpose: false
@@ -270,10 +287,12 @@
       Mes Calendario Date: calendario_nomina.mes_calendario_date
       Division: complemento_nomina.division
       Subdivision: complemento_nomina.subdivision
-    row: 21
-    col: 7
-    width: 10
-    height: 11
+      Codigo Pais: complemento_nomina.codigo_pais
+      Sociedad: complemento_nomina.sociedad
+    row: 11
+    col: 15
+    width: 9
+    height: 7
   - title: Distribución Nómina por Area
     name: Distribución Nómina por Area
     model: ti_rrhh
@@ -282,7 +301,6 @@
     fields: [complemento_nomina.area, complemento_nomina.nomina]
     filters:
       complemento_nomina.area: "-NULL"
-    sorts: [complemento_nomina.nomina desc 0]
     limit: 500
     column_limit: 50
     value_labels: labels
@@ -297,6 +315,8 @@
       Mes Calendario Date: calendario_nomina.mes_calendario_date
       Division: complemento_nomina.division
       Subdivision: complemento_nomina.subdivision
+      Codigo Pais: complemento_nomina.codigo_pais
+      Sociedad: complemento_nomina.sociedad
     row: 0
     col: 16
     width: 8
@@ -353,7 +373,9 @@
       Mes Calendario Date: calendario_nomina.mes_calendario_date
       Division: complemento_nomina.division
       Subdivision: complemento_nomina.subdivision
-    row: 32
+      Codigo Pais: complemento_nomina.codigo_pais
+      Sociedad: complemento_nomina.sociedad
+    row: 18
     col: 0
     width: 24
     height: 7
@@ -413,7 +435,9 @@
       Mes Calendario Date: calendario_nomina.mes_calendario_date
       Division: complemento_nomina.division
       Subdivision: complemento_nomina.subdivision
-    row: 39
+      Codigo Pais: complemento_nomina.codigo_pais
+      Sociedad: complemento_nomina.sociedad
+    row: 25
     col: 0
     width: 24
     height: 7
@@ -421,7 +445,7 @@
   - name: Mes Calendario Date
     title: Mes Calendario Date
     type: field_filter
-    default_value: 2025-01
+    default_value: last month
     allow_multiple_values: true
     required: false
     ui_config:
@@ -432,6 +456,19 @@
     explore: complemento_nomina
     listens_to_filters: []
     field: calendario_nomina.mes_calendario_date
+  - name: Codigo Pais
+    title: Codigo Pais
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: ti_rrhh
+    explore: complemento_nomina
+    listens_to_filters: []
+    field: complemento_nomina.codigo_pais
   - name: Division
     title: Division
     type: field_filter
@@ -445,6 +482,19 @@
     explore: complemento_nomina
     listens_to_filters: []
     field: complemento_nomina.division
+  - name: Sociedad
+    title: Sociedad
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: ti_rrhh
+    explore: complemento_nomina
+    listens_to_filters: [Codigo Pais]
+    field: complemento_nomina.sociedad
   - name: Subdivision
     title: Subdivision
     type: field_filter
@@ -456,5 +506,5 @@
       display: popover
     model: ti_rrhh
     explore: complemento_nomina
-    listens_to_filters: [Division]
+    listens_to_filters: [Division, Codigo Pais]
     field: complemento_nomina.subdivision

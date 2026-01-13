@@ -72,6 +72,7 @@
       Division Envases: vw_complemento_capacitacion_vacantes.division_envases
       Codigo Pais: vw_complemento_capacitacion_vacantes.codigo_pais
       Centro: vw_complemento_capacitacion_vacantes.centro
+      Sociedad: vw_complemento_capacitacion_vacantes.sociedad
     row: 0
     col: 0
     width: 12
@@ -157,6 +158,7 @@
       Division Envases: vw_complemento_capacitacion_vacantes.division_envases
       Codigo Pais: vw_complemento_capacitacion_vacantes.codigo_pais
       Centro: vw_complemento_capacitacion_vacantes.centro
+      Sociedad: vw_complemento_capacitacion_vacantes.sociedad
     row: 0
     col: 12
     width: 12
@@ -263,6 +265,7 @@
       Division Envases: vw_complemento_capacitacion_vacantes.division_envases
       Codigo Pais: vw_complemento_capacitacion_vacantes.codigo_pais
       Centro: vw_complemento_capacitacion_vacantes.centro
+      Sociedad: vw_complemento_capacitacion_vacantes.sociedad
     row: 9
     col: 0
     width: 24
@@ -356,6 +359,7 @@
       Division Envases: vw_complemento_capacitacion_vacantes.division_envases
       Codigo Pais: vw_complemento_capacitacion_vacantes.codigo_pais
       Centro: vw_complemento_capacitacion_vacantes.centro
+      Sociedad: vw_complemento_capacitacion_vacantes.sociedad
     row: 19
     col: 0
     width: 12
@@ -364,7 +368,7 @@
   - name: Periodo Date
     title: Periodo Date
     type: field_filter
-    default_value: 2025-01
+    default_value: last month
     allow_multiple_values: true
     required: false
     ui_config:
@@ -375,19 +379,6 @@
     explore: vw_complemento_capacitacion_vacantes
     listens_to_filters: []
     field: vw_complemento_capacitacion_vacantes.periodo_date
-  - name: Division Envases
-    title: Division Envases
-    type: field_filter
-    default_value: ''
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: tag_list
-      display: popover
-    model: ti_rrhh
-    explore: vw_complemento_capacitacion_vacantes
-    listens_to_filters: []
-    field: vw_complemento_capacitacion_vacantes.division_envases
   - name: Codigo Pais
     title: Codigo Pais
     type: field_filter
@@ -401,6 +392,32 @@
     explore: vw_complemento_capacitacion_vacantes
     listens_to_filters: []
     field: vw_complemento_capacitacion_vacantes.codigo_pais
+  - name: Division Envases
+    title: Division Envases
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: ti_rrhh
+    explore: vw_complemento_capacitacion_vacantes
+    listens_to_filters: []
+    field: vw_complemento_capacitacion_vacantes.division_envases
+  - name: Sociedad
+    title: Sociedad
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: ti_rrhh
+    explore: vw_complemento_capacitacion_vacantes
+    listens_to_filters: [Codigo Pais]
+    field: vw_complemento_capacitacion_vacantes.sociedad
   - name: Centro
     title: Centro
     type: field_filter
@@ -412,5 +429,5 @@
       display: popover
     model: ti_rrhh
     explore: vw_complemento_capacitacion_vacantes
-    listens_to_filters: [Division Envases]
+    listens_to_filters: [Codigo Pais]
     field: vw_complemento_capacitacion_vacantes.centro

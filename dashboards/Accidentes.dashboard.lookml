@@ -15,8 +15,7 @@
       vw_complemento_ausentismos_accidentes.accidentes_adp_month, vw_complemento_ausentismos_accidentes.dias_incapacidad_month,
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month, vw_complemento_ausentismos_accidentes.indice_severidad_month]
     filters:
-      vw_complemento_ausentismos_accidentes.area_personal: Administrativo,Ejecutivo,Operativo,Sin
-        Asignar,Sindicalizado
+      vw_complemento_ausentismos_accidentes.area_personal: "-NULL"
     sorts: [vw_complemento_ausentismos_accidentes.area_personal]
     subtotals: [vw_complemento_ausentismos_accidentes.area_personal]
     limit: 500
@@ -95,6 +94,8 @@
       Periodo: calendario.sel_periodo
       Division: vw_complemento_ausentismos_accidentes.division
       Centro: vw_complemento_ausentismos_accidentes.subdivision
+      Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
+      Sociedad: vw_complemento_ausentismos_accidentes.sociedad
     row: 0
     col: 0
     width: 24
@@ -109,8 +110,7 @@
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month, vw_complemento_ausentismos_accidentes.indice_severidad_month,
       vw_complemento_ausentismos_accidentes.subdivision]
     filters:
-      vw_complemento_ausentismos_accidentes.area_personal: Administrativo,Ejecutivo,Operativo,Sin
-        Asignar,Sindicalizado
+      vw_complemento_ausentismos_accidentes.area_personal: "-NULL"
     sorts: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division]
     subtotals: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division]
     limit: 500
@@ -190,6 +190,8 @@
       Periodo: calendario.sel_periodo
       Division: vw_complemento_ausentismos_accidentes.division
       Centro: vw_complemento_ausentismos_accidentes.subdivision
+      Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
+      Sociedad: vw_complemento_ausentismos_accidentes.sociedad
     row: 12
     col: 0
     width: 24
@@ -202,8 +204,7 @@
     fields: [vw_complemento_ausentismos_accidentes.division, vw_complemento_ausentismos_accidentes.accidentes_adp_month,
       vw_complemento_ausentismos_accidentes.subdivision, vw_complemento_ausentismos_accidentes.accidentes_meta_indicador_month]
     filters:
-      vw_complemento_ausentismos_accidentes.area_personal: Administrativo,Ejecutivo,Operativo,Sin
-        Asignar,Sindicalizado
+      vw_complemento_ausentismos_accidentes.area_personal: "-NULL"
     sorts: [vw_complemento_ausentismos_accidentes.division]
     subtotals: [vw_complemento_ausentismos_accidentes.division]
     limit: 500
@@ -283,6 +284,8 @@
       Periodo: calendario.sel_periodo
       Division: vw_complemento_ausentismos_accidentes.division
       Centro: vw_complemento_ausentismos_accidentes.subdivision
+      Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
+      Sociedad: vw_complemento_ausentismos_accidentes.sociedad
     row: 24
     col: 0
     width: 24
@@ -402,6 +405,8 @@
       Periodo: calendario.sel_periodo
       Division: vw_complemento_ausentismos_accidentes.division
       Centro: vw_complemento_ausentismos_accidentes.subdivision
+      Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
+      Sociedad: vw_complemento_ausentismos_accidentes.sociedad
     row: 36
     col: 0
     width: 24
@@ -410,7 +415,7 @@
   - name: Periodo
     title: Periodo
     type: field_filter
-    default_value: 2025/01/31
+    default_value: last month
     allow_multiple_values: true
     required: false
     ui_config:
@@ -421,6 +426,19 @@
     explore: vw_complemento_ausentismos_accidentes
     listens_to_filters: []
     field: calendario.sel_periodo
+  - name: Codigo Pais
+    title: Codigo Pais
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+    model: ti_rrhh
+    explore: vw_complemento_ausentismos_accidentes
+    listens_to_filters: []
+    field: vw_complemento_ausentismos_accidentes.codigo_pais
   - name: Division
     title: Division
     type: field_filter
@@ -434,6 +452,19 @@
     explore: vw_complemento_ausentismos_accidentes
     listens_to_filters: []
     field: vw_complemento_ausentismos_accidentes.division
+  - name: Sociedad
+    title: Sociedad
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+    model: ti_rrhh
+    explore: vw_complemento_ausentismos_accidentes
+    listens_to_filters: [Codigo Pais]
+    field: vw_complemento_ausentismos_accidentes.sociedad
   - name: Centro
     title: Centro
     type: field_filter
@@ -445,5 +476,5 @@
       display: popover
     model: ti_rrhh
     explore: vw_complemento_ausentismos_accidentes
-    listens_to_filters: [Division]
+    listens_to_filters: [Division, Codigo Pais]
     field: vw_complemento_ausentismos_accidentes.subdivision
