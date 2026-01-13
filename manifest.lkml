@@ -7,7 +7,7 @@ constant: CONNECTION_NAME {
 }
 
 constant: GCP_PROJECT {
-  value: "envases-analytics-eon-poc"
+  value: "envases-analytics-qa"
   export: override_required
 }
 
