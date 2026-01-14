@@ -1,7 +1,7 @@
 project_name: "ti_rrhh"
 
 constant: CONNECTION_NAME {
-  value: "envases-alg-analytics-non-prod"
+  value: "envases_ti_rrhh"
   # value: "envases-alg-analytics-non-prod"
   export: override_required
 }
