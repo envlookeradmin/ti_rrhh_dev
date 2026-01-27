@@ -11,7 +11,7 @@
     model: ti_rrhh
     explore: vw_complemento_ausentismos_accidentes
     type: looker_grid
-    fields: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division,
+    fields: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division_envases,
       vw_complemento_ausentismos_accidentes.accidentes_adp_month, vw_complemento_ausentismos_accidentes.dias_incapacidad_month,
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month, vw_complemento_ausentismos_accidentes.indice_severidad_month]
     filters:
@@ -43,7 +43,7 @@
     minimum_column_width: 75
     series_labels:
       vw_complemento_ausentismos_accidentes.area_personal: Area de Personal
-      vw_complemento_ausentismos_accidentes.division: Div. Negocio
+      vw_complemento_ausentismos_accidentes.division_envases: Div. Negocio
       vw_complemento_ausentismos_accidentes.accidentes_adp_month: Accidentes ADP
       vw_complemento_ausentismos_accidentes.dias_incapacidad_month: Días de Incapacidad
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month: Índice de
@@ -92,7 +92,7 @@
     hidden_pivots: {}
     listen:
       Periodo: calendario.sel_periodo
-      Division: vw_complemento_ausentismos_accidentes.division
+      Division: vw_complemento_ausentismos_accidentes.division_envases
       Centro: vw_complemento_ausentismos_accidentes.subdivision
       Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
       Sociedad: vw_complemento_ausentismos_accidentes.sociedad
@@ -105,14 +105,14 @@
     model: ti_rrhh
     explore: vw_complemento_ausentismos_accidentes
     type: looker_grid
-    fields: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division,
+    fields: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division_envases,
       vw_complemento_ausentismos_accidentes.accidentes_adp_month, vw_complemento_ausentismos_accidentes.dias_incapacidad_month,
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month, vw_complemento_ausentismos_accidentes.indice_severidad_month,
       vw_complemento_ausentismos_accidentes.subdivision]
     filters:
       vw_complemento_ausentismos_accidentes.area_personal: "-NULL"
-    sorts: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division]
-    subtotals: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division]
+    sorts: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division_envases]
+    subtotals: [vw_complemento_ausentismos_accidentes.area_personal, vw_complemento_ausentismos_accidentes.division_envases]
     limit: 500
     column_limit: 50
     total: true
@@ -138,7 +138,7 @@
     minimum_column_width: 75
     series_labels:
       vw_complemento_ausentismos_accidentes.area_personal: Area de Personal
-      vw_complemento_ausentismos_accidentes.division: Div. Negocio
+      vw_complemento_ausentismos_accidentes.division_envases: Div. Negocio
       vw_complemento_ausentismos_accidentes.accidentes_adp_month: Accidentes ADP
       vw_complemento_ausentismos_accidentes.dias_incapacidad_month: Días de Incapacidad
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month: Índice de
@@ -188,7 +188,7 @@
     hidden_pivots: {}
     listen:
       Periodo: calendario.sel_periodo
-      Division: vw_complemento_ausentismos_accidentes.division
+      Division: vw_complemento_ausentismos_accidentes.division_envases
       Centro: vw_complemento_ausentismos_accidentes.subdivision
       Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
       Sociedad: vw_complemento_ausentismos_accidentes.sociedad
@@ -201,12 +201,12 @@
     model: ti_rrhh
     explore: vw_complemento_ausentismos_accidentes
     type: looker_grid
-    fields: [vw_complemento_ausentismos_accidentes.division, vw_complemento_ausentismos_accidentes.accidentes_adp_month,
+    fields: [vw_complemento_ausentismos_accidentes.division_envases, vw_complemento_ausentismos_accidentes.accidentes_adp_month,
       vw_complemento_ausentismos_accidentes.subdivision, vw_complemento_ausentismos_accidentes.accidentes_meta_indicador_month]
     filters:
       vw_complemento_ausentismos_accidentes.area_personal: "-NULL"
-    sorts: [vw_complemento_ausentismos_accidentes.division]
-    subtotals: [vw_complemento_ausentismos_accidentes.division]
+    sorts: [vw_complemento_ausentismos_accidentes.division_envases]
+    subtotals: [vw_complemento_ausentismos_accidentes.division_envases]
     limit: 500
     column_limit: 50
     total: true
@@ -232,7 +232,7 @@
     minimum_column_width: 75
     series_labels:
       vw_complemento_ausentismos_accidentes.area_personal: Area de Personal
-      vw_complemento_ausentismos_accidentes.division: Div. Negocio
+      vw_complemento_ausentismos_accidentes.division_envases: Div. Negocio
       vw_complemento_ausentismos_accidentes.accidentes_adp_month: Accidentes ADP
       vw_complemento_ausentismos_accidentes.dias_incapacidad_month: Días de Incapacidad
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month: Índice de
@@ -282,7 +282,7 @@
     hidden_pivots: {}
     listen:
       Periodo: calendario.sel_periodo
-      Division: vw_complemento_ausentismos_accidentes.division
+      Division: vw_complemento_ausentismos_accidentes.division_envases
       Centro: vw_complemento_ausentismos_accidentes.subdivision
       Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
       Sociedad: vw_complemento_ausentismos_accidentes.sociedad
@@ -352,7 +352,7 @@
       Ejecutivo - vw_complemento_ausentismos_accidentes.ausentismos_month: "#1A73E8"
     series_labels:
       vw_complemento_ausentismos_accidentes.area_personal: Area de Personal
-      vw_complemento_ausentismos_accidentes.division: Div. Negocio
+      vw_complemento_ausentismos_accidentes.division_envases: Div. Negocio
       vw_complemento_ausentismos_accidentes.accidentes_adp_month: Accidentes ADP
       vw_complemento_ausentismos_accidentes.dias_incapacidad_month: Días de Incapacidad
       vw_complemento_ausentismos_accidentes.indice_frecuencia_ltr_month: Índice de
@@ -403,7 +403,7 @@
     hidden_pivots: {}
     listen:
       Periodo: calendario.sel_periodo
-      Division: vw_complemento_ausentismos_accidentes.division
+      Division: vw_complemento_ausentismos_accidentes.division_envases
       Centro: vw_complemento_ausentismos_accidentes.subdivision
       Codigo Pais: vw_complemento_ausentismos_accidentes.codigo_pais
       Sociedad: vw_complemento_ausentismos_accidentes.sociedad
@@ -451,7 +451,7 @@
     model: ti_rrhh
     explore: vw_complemento_ausentismos_accidentes
     listens_to_filters: []
-    field: vw_complemento_ausentismos_accidentes.division
+    field: vw_complemento_ausentismos_accidentes.division_envases
   - name: Sociedad
     title: Sociedad
     type: field_filter

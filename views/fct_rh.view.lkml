@@ -1,7 +1,6 @@
 view: fct_rh {
   derived_table: {
     sql: SELECT
-        EXTRACT(YEAR FROM MED.BEGDA) Anio,
         MED.PERNR CodigoPersonal,
         MED.BEGDA Inicio,
         MED.ENDDA Fin,
@@ -135,11 +134,6 @@ view: fct_rh {
 
   }
 
-  dimension: anio {
-    type: number
-    sql: ${TABLE}.Anio ;;
-    value_format: "0"
-  }
 
 
   measure: Importe_TODO {
@@ -150,30 +144,6 @@ view: fct_rh {
   measure: CONTEO_TODO {
     type: count_distinct
     sql: ${codigo_personal} ;;
-  }
-
-  measure: Var_HC{
-    group_label: "Var. HC"
-    type: number
-    sql:  (${CONTEO_TODO} - LAG(${CONTEO_TODO}) OVER (
-          PARTITION BY ${subdivision},${unidad_organizativa}
-          ORDER BY ${anio}
-          ) );;
-
-  }
-
-  measure: Var_HC_per{
-    group_label: "Var. HC"
-    type: number
-    sql: ((${CONTEO_TODO} - LAG(${CONTEO_TODO}) OVER (
-          PARTITION BY ${subdivision},${unidad_organizativa}
-          ORDER BY ${anio}))
-          /
-          (LAG(${CONTEO_TODO}) OVER (
-          PARTITION BY ${subdivision},${unidad_organizativa}
-          ORDER BY ${anio})) ) ;;
-    value_format: "0.00\%"
-
   }
 
 
