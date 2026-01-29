@@ -14,7 +14,7 @@ view: menu_navegacion_443 {
   dimension: button_altas {
     label: "Altas"
     type: string
-    sql: 'Altas' ;;
+    sql: 'Altas  ' ;;
 
     link: {
       label: "Altas"
@@ -62,7 +62,7 @@ view: menu_navegacion_443 {
   dimension: button_nomina {
     label: "Nomina"
     type: string
-    sql: 'NOMINA' ;;
+    sql: 'Nomina' ;;
 
     link: {
       label: "Nomina"
