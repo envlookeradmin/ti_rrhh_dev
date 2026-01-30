@@ -11,6 +11,7 @@ view: menu_navegacion_443 {
     }
   }
 
+
   dimension: button_altas {
     label: "Altas"
     type: string
