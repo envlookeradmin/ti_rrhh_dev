@@ -1,13 +1,13 @@
 project_name: "ti_rrhh"
 
 constant: CONNECTION_NAME {
-  value: "envases-alg-analytics-non-prod"
-  # value: "envases-alg-analytics-non-prod"
+  value: "envases_ti_rrhh"
+  # value: "envases-alg-analytics-prod"
   export: override_required
 }
 
 constant: GCP_PROJECT {
-  value: "envases-analytics-qa"
+  value: "envases-analytics-eon-poc"
   export: override_required
 }
 
