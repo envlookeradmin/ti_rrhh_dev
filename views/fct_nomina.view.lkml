@@ -1,3 +1,4 @@
+include: "rrhh_parametros.view"
 view: fct_nomina {
   derived_table: {
     sql: SELECT
@@ -44,6 +45,7 @@ view: fct_nomina {
 
       ;;
   }
+  extends: [rrhh_parametros]
 
   ## ========================= ##
   ##   Nomina                  ##
@@ -236,14 +238,14 @@ view: fct_nomina {
   ## ========================= ##
   ##           Filtros         ##
   ## ========================= ##
-
-  # Filtro de fecha
-  filter: date_filter {
-    label: "Período"
-    description: "Usa este filtro de fecha en combinación con la dimensión de timeframes para filtrado dinámico de fechas"
-    type: date
-    default_value: "[hoy]"
-  }
+  # Este filtro se cambió para que venga de rrhh_parametros
+  # # Filtro de fecha
+  # filter: date_filter {
+  #   label: "Período"
+  #   description: "Usa este filtro de fecha en combinación con la dimensión de timeframes para filtrado dinámico de fechas"
+  #   type: date
+  #   default_value: "[hoy]"
+  # }
 
   ## ========================= ##
   ##      Filtros ocultos      ##
