@@ -29,6 +29,7 @@ view: fct_rh_2 {
             ON ACTIVOS.CodigoPersonal = Remuneraciones.PERNR
             AND LAST_DAY(PERIODO.PERIODO, month) BETWEEN Remuneraciones.BEGDA AND Remuneraciones.ENDDA;;
   }
+
   extends: [rrhh_parametros]
   ## ========================= ##
   ##        DIMENSIONES        ##
