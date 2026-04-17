@@ -14,17 +14,20 @@ view: fct_rh_2 {
         FROM CALENDARIO
         GROUP BY 1 ),
       ACTIVOS AS (
-        SELECT *
+        SELECT * EXCEPT (SalarioSemanal, SalarioMensual)
         FROM `RPT_CORP.RRHH_Plantilla`
         WHERE
           Estatus = 'Activo'
           AND CodigoPersonal < 10000000 )
       SELECT
         PERIODO.PERIODO,
-        ACTIVOS.*
+        ACTIVOS.*, Remuneraciones.SalarioSemanal, Remuneraciones.SalarioMensual
         FROM
           PERIODO
-          LEFT JOIN ACTIVOS ON ACTIVOS.Fin >= PERIODO.FIN AND ACTIVOS.Inicio <= PERIODO.FIN ;;
+          LEFT JOIN ACTIVOS ON ACTIVOS.Fin >= PERIODO.FIN AND ACTIVOS.Inicio <= PERIODO.FIN
+          LEFT JOIN `RAW_CPI_RRHH_MX.PA0008_REMUNERACIONES` Remuneraciones
+            ON Medidas.PERNR = Remuneraciones.PERNR
+            AND LAST_DAY(PERIODO.PERIODO, month) BETWEEN Remuneraciones.BEGDA AND Remuneraciones.ENDDA;;
   }
   extends: [rrhh_parametros]
   ## ========================= ##
