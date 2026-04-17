@@ -83,7 +83,7 @@ view: fct_rh_2 {
     hidden: yes
     description: "Determina si el periodo es menor o igual al mes seleccionado, sin importar el año"
     type: yesno
-    sql: EXTRACT(Month FROM ${periodo_raw}) <= ${mes_seleccionado} ;;
+    sql: EXTRACT(Month FROM ${periodo_raw}) = ${mes_seleccionado} ;;
   }
   ## ========================= ##
   ##         METRICAS          ##
