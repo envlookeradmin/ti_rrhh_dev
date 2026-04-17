@@ -21,12 +21,12 @@ view: fct_rh_2 {
           AND CodigoPersonal < 10000000 )
       SELECT
         PERIODO.PERIODO,
-        ACTIVOS.*, Remuneraciones.SalarioSemanal, Remuneraciones.SalarioMensual
+        ACTIVOS.*, Remuneraciones.BET01 SalarioSemanal, (Remuneraciones.BET01 / 7) * 30.4 SalarioMensual
         FROM
           PERIODO
           LEFT JOIN ACTIVOS ON ACTIVOS.Fin >= PERIODO.FIN AND ACTIVOS.Inicio <= PERIODO.FIN
           LEFT JOIN `RAW_CPI_RRHH_MX.PA0008_REMUNERACIONES` Remuneraciones
-            ON Medidas.PERNR = Remuneraciones.PERNR
+            ON ACTIVOS.CodigoPersonal = Remuneraciones.PERNR
             AND LAST_DAY(PERIODO.PERIODO, month) BETWEEN Remuneraciones.BEGDA AND Remuneraciones.ENDDA;;
   }
   extends: [rrhh_parametros]
